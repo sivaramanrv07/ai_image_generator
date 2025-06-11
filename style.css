@@ -1,243 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.image_generator{
-    height: 48vh;
-    display: flex;
-    position: relative;
-    align-items: center;.voice_input_wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 15px;
+
+body {
+  overflow-y: auto;
+}
+
+
+.image_generator {
+  height: 48vh;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background: url("images/bbc.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.image_generator::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background: #121212;
+}
+
+.image_generator .content {
+  color: #fff;
+  padding: 0 15px;
+  max-width: 760px;
+  text-align: center;
+  position: relative;
+}
+
+.image_generator h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.image_generator p {
+  font-size: 1.35rem;
+  margin-top: 10px;
+}
+
+.image_generator .generate_form {
+  height: 45px;
+  width: 100%;
+  display: flex;
+  margin: 45px 0 15px 0;
+  padding: 6px;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 30px;
+}
+
+.voice_input_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
 }
 
 .prompt_input {
-    flex: 1;
-    padding: 12px 16px;
-    font-size: 1rem;
-    border-radius: 6px;
-    outline: none;
-    transition: border-color 0.3s ease;
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-
+.generate_form .prompt_input {
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0 17px;
+}
 
 #mic_btn {
-    background-color: #cacaca;
-    border: none;
-    border-radius:20%;
-    width: 34px;
-    height: 34px;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    user-select: none;
+  background-color: #cacaca;
+  border: none;
+  border-radius: 20%;
+  width: 34px;
+  height: 34px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  user-select: none;
 }
 
 #mic_btn:hover {
-    
-    background-color:   #4949e7;;
-    transform: scale(0.9);
+  background-color: #4949e7;
+  transform: scale(0.9);
 }
 
 #mic_btn:active {
-    transform: scale(0.65);
+  transform: scale(0.65);
 }
 
-
-
-    justify-content: center;
-    background: url("images/bbc.jpg");
-    background-size: cover;
-    background-position: center center;
-}
-.image_generator::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
-    background: #121212;
-}
-.image_generator .content{
-    color: #fff;
-    padding: 0 15px;
-    max-width: 760px;
-    text-align: center;
-    position: relative;
-}
-.image_generator h1{
-    font-size: 2.5rem;
-    font-weight: 700;
-}
-.image_generator p{
-    font-size: 1.35rem;
-    margin-top: 10px;
-}
-.image_generator .generate_form{
-    height: 45px;
-    width: 100%;
-    display: flex;
-    margin: 45px 0 15px 0;
-    padding: 6px;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    border-radius: 30px;
-}
-.generate_form .prompt_input{
-     width: 100%;
-     height: 100%;
-     font-size: 1rem;
-     outline: none;
-     border: none;
-     background: none;
-     padding: 0 17px;
-}
-.generate_form .control{
-    display: flex;
-    height: 100%;
-    gap: 15px;
-
-}
-.generate_form .img_quantity, .generate_btn{
-    outline: none;
-    border: none;
-    background: none;
-    font-size: 1rem;
-}
-.generate_form .generate_btn{
-    background: #4949e7;
-    color: #fff;
-    font-weight: 600;
-    padding: 0 25px;
-    cursor: pointer;
-    border-radius: 30px;
-}
-.img_gallery{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 0 15px;
-    max-width: 1250px;
-    margin:  50px auto;
-    justify-content: center;
+.generate_form .control {
+  display: flex;
+  height: 100%;
+  gap: 15px;
 }
 
-.img_gallery .img_card{
-    width: 275px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1/1;
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    background: #f2f2f2;
+.generate_form .img_quantity,
+.generate_btn {
+  outline: none;
+  border: none;
+  background: none;
+  font-size: 1rem;
 }
 
-.img_gallery .img_card img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.img_gallery .img_card.loading img{
-    width: 80px;
-    height: 80px;
-}
-
-
-.img_gallery .img_card .download_btn{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: #fff;
-    height: 36px;
-    width: 36px;
-    border-radius: 50%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-.img_gallery .img_card:not(.loading):hover .download_btn{
-    display: flex;
+.generate_form .generate_btn {
+  background: #4949e7;
+  color: #fff;
+  font-weight: 600;
+  padding: 0 25px;
+  cursor: pointer;
+  border-radius: 30px;
 }
 
-.img_gallery .img_card .download_btn img{
-    width: 14px;
-    height: 14px;
+.img_gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 0 15px;
+  max-width: 1250px;
+  margin: 50px auto;
+  justify-content: center;
 }
 
-@media screen and (max-width:760px) {
-    .image_generator h1{
-        font-size: 1.8rem;
-    }
-    .image_generator p{
-        font-size: 1rem;
-    }
-    .image_generator .generate_form {
-        margin-top: 30px;
-        height: 52px;
-        display: block;
-    }
-    .generate_form .control{
-        height: 40px;
-        margin-top: 15px;
-        align-items: center;
-        justify-content: flex-end;
-    }
-    .generate_form .img_quantity{
-        color: #fff;
-    }
-    .generate_form .img_quantity option {
-        color: #000;
-    }
-    .generate_form .generate_btn {
-        height: 100%;
-    }
-    .img_gallery .img_card:not(.loading) .download_btn{
-        display: flex;
-    }
-    .image_gallery{
-        margin-top: 20px;
-    }
+.img_gallery .img_card {
+  width: 275px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background: #f2f2f2;
 }
-@media screen and (max-width:550px) {
-    .image_gallery .img_card{
-        width: 100%;
-    }
 
+.img_gallery .img_card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.loader {
-  border: 8px solid #e0d7f5;       /* light lavender */
-  border-top: 8px solid #7b3fbf;   /* vibrant purple */
+
+.img_gallery .img_card.loading img {
+  width: 80px;
+  height: 80px;
+}
+
+.img_gallery .img_card .download_btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: #fff;
+  height: 36px;
+  width: 36px;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  margin: 20px auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.img_gallery .img_card:not(.loading):hover .download_btn {
+  display: flex;
+}
+
+.img_gallery .img_card .download_btn img {
+  width: 14px;
+  height: 14px;
+}
+
+/* Responsive */
+@media screen and (max-width: 760px) {
+  .image_generator h1 {
+    font-size: 1.8rem;
+  }
+
+  .image_generator p {
+    font-size: 1rem;
+  }
+
+  .image_generator .generate_form {
+    margin-top: 30px;
+    height: 52px;
+    display: block;
+  }
+
+  .generate_form .control {
+    height: 40px;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .generate_form .img_quantity {
+    color: #fff;
+  }
+
+  .generate_form .img_quantity option {
+    color: #000;
+  }
+
+  .generate_form .generate_btn {
+    height: 100%;
+  }
+
+  .img_gallery .img_card:not(.loading) .download_btn {
+    display: flex;
+  }
+
+  .image_gallery {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .img_gallery .img_card {
+    width: 100%;
+  }
 }
 
 .error_message {
   color: rgb(241, 54, 54);
   font-weight: 600;
-  margin-top: 80px;       /* small gap below input */
+  margin-top: 80px;
   font-size: 0.9em;
-    /* reserve space */
+  text-align: center;
 }
 
 .prompt_input.error {
@@ -245,6 +256,75 @@
   outline: none;
 }
 
+/* Balloon loader */
+.game_animation {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  color: #444;
+  font-weight: 600;
+  font-size: 1.7rem;
+  animation: fadeIn 0.5s ease-in-out;
+  position: relative;
+  z-index: 1;
+  min-height: 400px;
+  overflow: hidden;
+}
 
+.game_animation img {
+  width: 140px;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+  position: relative;
+  z-index: 2;
+}
 
+.game_animation p {
+  position: relative;
+  z-index: 2;
+}
 
+#balloon_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(to top, #f0f8ff, #ffffff);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.balloon_message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10%, 90% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -20px); }
+}

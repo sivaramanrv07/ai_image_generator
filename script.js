@@ -183,3 +183,15 @@ promptInput.addEventListener("input", () => {
   errorMessage.textContent = "";
 });
 
+const bgMusic = document.getElementById("bg-music");
+
+// Start music on first user interaction (autoplay workaround)
+window.addEventListener("click", () => {
+  if (bgMusic && bgMusic.paused) {
+    bgMusic.play().catch(err => {
+      console.warn("Background music autoplay blocked:", err);
+    });
+  }
+}, { once: true });
+
+

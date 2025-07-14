@@ -248,15 +248,18 @@ body {
 .error_message {
   color: rgb(241, 54, 54);
   font-weight: 600;
-  margin-top: 80px;
+  margin-top: 10px;
   font-size: 0.9em;
   text-align: center;
+  background: #ffecec;
+  padding: 6px 10px;
+  border-radius: 4px;
 }
-
 .prompt_input.error {
   border: 2px solid red;
   outline: none;
 }
+
 
 /* Balloon loader */
 .game_animation {

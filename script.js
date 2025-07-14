@@ -1,4 +1,4 @@
-const API_TOKEN = "vk-vfye26qBB8wxHzNJZbWMjm4qP8ShUDrgWZHBv7cj3leZf2";
+const API_TOKEN = "vk-EDLcRdCFC4mwm2BXr1IUmdICYoJ2fWPNc43kDYPHVFzyJ3";
 
 const promptInput = document.querySelector(".prompt_input");
 const generateForm = document.querySelector(".generate_form");
@@ -16,6 +16,9 @@ if (!errorMessage) {
   generateForm.appendChild(errorMessage);
 }
 
+const typingSound = document.getElementById('typing-sound');
+const errorSound = document.getElementById('error-sound');
+
 // ✨ SHOW LOADER
 function showLoader() {
   gameAnimation.style.display = "flex";
@@ -26,7 +29,15 @@ function hideLoader() {
   gameAnimation.style.display = "none";
 }
 
-// Form submission
+// Typing sound effect
+promptInput.addEventListener('keydown', () => {
+  if (typingSound) {
+    typingSound.currentTime = 0;
+    typingSound.play();
+  }
+});
+
+// Form submission handler (single listener)
 generateForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -36,17 +47,28 @@ generateForm.addEventListener("submit", async (e) => {
 
   if (!prompt) {
     errorMessage.textContent = "Please enter a prompt.";
-    return;
-  }
-  if (/^\d+$/.test(prompt)) {
-    errorMessage.textContent = "Prompt cannot be only numbers.";
+    if (errorSound) {
+      errorSound.currentTime = 0;
+      errorSound.play();
+    }
     return;
   }
 
-  const quantity = parseInt(imgQuantitySelect.value);
-  imgGallery.innerHTML = "";
+  if (/^\d+$/.test(prompt)) {
+    errorMessage.textContent = "Prompt cannot be only numbers.";
+    if (errorSound) {
+      errorSound.currentTime = 0;
+      errorSound.play();
+    }
+    return;
+  }
+
+  errorMessage.textContent = "";
   submitBtn.disabled = true;
   showLoader();
+
+  const quantity = parseInt(imgQuantitySelect.value);
+  imgGallery.innerHTML = "";
 
   // Show placeholders
   for (let i = 0; i < quantity; i++) {
@@ -81,8 +103,8 @@ generateForm.addEventListener("submit", async (e) => {
     });
 
     setTimeout(() => {
-  imgGallery.innerHTML = "";
-}, 60000); // 1 minute = 60000 milliseconds
+      imgGallery.innerHTML = "";
+    }, 60000); // Clear images after 1 minute
 
   } catch (error) {
     imgGallery.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
@@ -156,87 +178,8 @@ if (SpeechRecognition) {
   micBtn.title = "Voice input not supported in this browser.";
 }
 
-// ❌ Clear error on input
+// Clear error message on input
 promptInput.addEventListener("input", () => {
   errorMessage.textContent = "";
 });
 
-// 🎈 Balloon Game Animation
-const canvas = document.getElementById("balloon_canvas");
-const ctx = canvas.getContext("2d");
-const popSound = new Audio("sounds/pop.mp3");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let balloons = [];
-
-function createBalloon() {
-  const messages = [
-    "🎈 Balloon popped!", "✨ Great job!", "💥 Boom!", "😄 Keep going!",
-    "🌟 You did it!", "🎉 Nice pop!", "🥳 Wow!", "👏 Pop success!",
-    "👍 Well done!", "🎊 Fun burst!"
-  ];
-  return {
-    x: Math.random() * canvas.width,
-    y: canvas.height + 100,
-    radius: 30 + Math.random() * 20,
-    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
-    speed: 1 + Math.random() * 2,
-    visible: true,
-    message: messages[Math.floor(Math.random() * messages.length)]
-  };
-}
-
-for (let i = 0; i < 15; i++) {
-  balloons.push(createBalloon());
-}
-
-function showBalloonMessage(text) {
-  const msg = document.getElementById("balloon_message");
-  msg.textContent = text;
-  msg.style.display = "block";
-  setTimeout(() => {
-    msg.style.display = "none";
-  }, 2000);
-}
-
-function drawBalloons() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let b of balloons) {
-    if (!b.visible) continue;
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-    ctx.fillStyle = b.color;
-    ctx.fill();
-    b.y -= b.speed;
-
-    if (b.y + b.radius < 0) {
-      Object.assign(b, createBalloon());
-    }
-  }
-}
-
-function animate() {
-  drawBalloons();
-  requestAnimationFrame(animate);
-}
-
-canvas.addEventListener("click", (e) => {
-  const rect = canvas.getBoundingClientRect();
-  const clickX = e.clientX - rect.left;
-  const clickY = e.clientY - rect.top;
-
-  balloons.forEach((b) => {
-    if (!b.visible) return;
-    const dist = Math.hypot(b.x - clickX, b.y - clickY);
-    if (dist < b.radius) {
-      b.visible = false;
-      popSound.currentTime = 0;
-      popSound.play();
-      showBalloonMessage(b.message);
-    }
-  });
-});
-
-animate();
